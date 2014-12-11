@@ -90,6 +90,17 @@ public class Node {
             IPs.get(key).display();
         }
     }
+    //for subnet part
+    public static boolean subNetIn(ArrayList<String> IPs,String subip){
+
+        for (String key : IPs) {
+            //System.out.println(key);
+            if(key.equals(subip)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 

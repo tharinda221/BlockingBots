@@ -4,8 +4,10 @@ import java.util.concurrent.ScheduledFuture;
 public class UNBlockIP implements Runnable {
     private int k;
     private String ip;
+    private String v;
     static ScheduledFuture<?> t;
-    public UNBlockIP(String ip){
+    public UNBlockIP(String ip,String v){
+        this.v=v;
         this.ip=ip;
     }
 
@@ -19,9 +21,12 @@ public class UNBlockIP implements Runnable {
     }
     public void RunThis(){
         if(! ip.equals("")){
-            System.out.println("iptables" + " " + "-D" + " " + "INPUT" + " " + "-s" + " " + ip + " " + "-j" + " " + "DROP");
+            if(v.equals("ns")) {
+                System.out.println("iptables" + " " + "-D" + " " + "INPUT" + " " + "-s" + " " + ip + " " + "-j" + " " + "DROP");
+            }
+            else{
+                System.out.println("iptables"+" "+"-D"+" "+"INPUT"+" "+"-s"+" " + ip+" " + "-j"+" "+ "ACCEPT");
+            }
         }
-
-
     }
 }
