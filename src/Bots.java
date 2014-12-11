@@ -2,8 +2,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Bots {
+
+    static ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+    static ScheduledFuture<?> t;
 
     public static void main(String [] args) {
         Scanner in = new Scanner(System.in);
@@ -34,13 +41,24 @@ public class Bots {
                         String time=Reg.regexChecker("[0-9]{1,2}+\\:[0-9]{1,2}+\\:[0-9]{1,2}",line);
                         //gets Ip Address and its failed time by searching log file
 
-                        //Identify a bot and add it into hashmap
+                        //Identify a bot and add it into Hashmap
                         if(Node.searchNode(IPs, ip)){
                             Node.UpdateNode(IPs, ip, 1);
 
                         }
                         else{
                             IPs.put(ip, new Node(ip, 1, time));
+
+                        }
+
+                        //Blocked if counts is equal to some specific value
+                        if(Node.SelectIpAdd(IPs, ip,2)){
+
+                            Node.writeIPS(ip,time,".\\Blocked.txt");
+                            new BlockIP(ip);
+                            t = executor.schedule(new UNBlockIP(ip), 10, SECONDS);
+                            IPs.remove(ip);
+
 
                         }
 
