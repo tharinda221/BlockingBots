@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Bots {
@@ -7,6 +8,8 @@ public class Bots {
     public static void main(String [] args) {
         Scanner in = new Scanner(System.in);
         String fileName = in.nextLine();
+        //data structures
+        HashMap<String, Node> IPs = new HashMap<String, Node>();
 
         try {
             @SuppressWarnings("unchecked")
@@ -31,6 +34,16 @@ public class Bots {
                         String time=Reg.regexChecker("[0-9]{1,2}+\\:[0-9]{1,2}+\\:[0-9]{1,2}",line);
                         //gets Ip Address and its failed time by searching log file
 
+                        //Identify a bot and add it into hashmap
+                        if(Node.searchNode(IPs, ip)){
+                            Node.UpdateNode(IPs, ip, 1);
+
+                        }
+                        else{
+                            IPs.put(ip, new Node(ip, 1, time));
+
+                        }
+
                     }
                 }
 
@@ -41,5 +54,5 @@ public class Bots {
         }
     }
 
-    
+
 }
