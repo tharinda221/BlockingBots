@@ -22,7 +22,8 @@ public class Bots {
             @SuppressWarnings("unchecked")
             FileReader fileRd = new FileReader(fileName);
             BufferedReader bufferRd = new BufferedReader(fileRd);
-            int k = 0;
+            AutomatedTelnetClient telnet = new AutomatedTelnetClient();
+
             String line;
 
             while(true){

@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="geoip-api-1.2.10" level="project" />
+    <orderEntry type="library" name="commons-net-1.0.0" level="project" />
   </component>
 </module>
