@@ -20,12 +20,13 @@ public class Bots {
         HashMap<String, Node> IPs = new HashMap<String, Node>();
         HashMap<String, Node> SubIPs = new HashMap<String, Node>();
         ArrayList<String> Submask = new ArrayList<String>();
+        AutomatedTelnetClient telnet = new AutomatedTelnetClient();
 
         try {
             @SuppressWarnings("unchecked")
             FileReader fileRd = new FileReader(fileName);
             BufferedReader bufferRd = new BufferedReader(fileRd);
-            AutomatedTelnetClient telnet = new AutomatedTelnetClient();
+
 
             String line;
 
@@ -52,9 +53,11 @@ public class Bots {
                         if(Node.searchNode(IPs, ip)){
                             Node.UpdateNode(IPs, ip, 1);
 
+
                         }
                         else{
                             IPs.put(ip, new Node(ip, 1, time));
+                            Submask.add(subip);
 
                         }
                         //Identify a Subnet bots and add that subnet into Hashmap
