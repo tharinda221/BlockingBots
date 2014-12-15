@@ -49,6 +49,15 @@ public class Bots {
                         //get Subnet Mask
                         String subip=telnet.AutomatedTelnet("route-server.ip-plus.net", "rviews", "rviews", ip);
 
+                        //Identify a Subnet bots and add that subnet into Hashmap
+                        if(Node.subNetIn(Submask, subip) && !Node.searchNode(IPs,ip)  ){
+                            if(Node.searchNode(SubIPs, subip)){
+                                Node.UpdateNode(SubIPs, subip, 1);
+                            }
+                            else{
+                                SubIPs.put(subip, new Node(subip, 2, time));
+                            }
+                        }
                         //Identify a bot and add it into Hashmap
                         if(Node.searchNode(IPs, ip)){
                             Node.UpdateNode(IPs, ip, 1);
@@ -60,15 +69,7 @@ public class Bots {
                             Submask.add(subip);
 
                         }
-                        //Identify a Subnet bots and add that subnet into Hashmap
-                        if(Node.subNetIn(Submask, subip)  ){
-                            if(Node.searchNode(SubIPs, subip)){
-                                Node.UpdateNode(SubIPs, subip, 1);
-                            }
-                            else{
-                                SubIPs.put(subip, new Node(subip, 2, time));
-                            }
-                        }
+
 
                         //Blocked if counts is equal to some specific value
                         if(Node.SelectIpAdd(IPs, ip,2)){
