@@ -12,21 +12,21 @@ public class BotsMain extends Thread {
     public static HashMap<String, Node> IPs = new HashMap<String, Node>();
     public static HashMap<String, Node> SubIPs = new HashMap<String, Node>();
     public static ArrayList<String> Submask = new ArrayList<String>();
-    public static String ip;
-    public static String time;
-    public static String subip;
+    public  String ip;
+    public  String time;
+    public  String subip;
     AutomatedTelnetClient telnet = new AutomatedTelnetClient();
 
-    public BotsMain(String ip,String time,String subip){
+    public BotsMain(String ip,String time){
 
         this.ip=ip;
         this.time=time;
-        this.subip=subip;
+
 
     }
     public void RunThis(){
 
-
+        String subip=telnet.AutomatedTelnet("route-server.ip-plus.net", "rviews", "rviews", ip);
         //Identify a Subnet bots and add that subnet into Hashmap
         if(Node.subNetIn(Submask, subip) && !Node.searchNode(IPs,ip)  ){
             if(Node.searchNode(SubIPs, subip)){

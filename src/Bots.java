@@ -47,9 +47,9 @@ public class Bots {
                         //gets Ip Address and its failed time by searching log file
 
                         //get Subnet Mask
-                        String subip=telnet.AutomatedTelnet("route-server.ip-plus.net", "rviews", "rviews", ip);
 
-                        BotsMain BotsMain=new BotsMain(ip,time,subip);
+
+                        BotsMain BotsMain=new BotsMain(ip,time);
                         BotsMain.start();
 
 
